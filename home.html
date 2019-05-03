@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{%block content %}
+    {% if not selected_category or selected_category == "All" %}
+        {% for post in posts%}
+            <div class="content-section">
+                <h1><a href="{{ url_for('post', post_id=post.id) }}"> {{ post.title }} </a> </h1>
+                <p> By {{ post.author }} on {{ post.date_posted.strftime('%B %d %Y') }}</p>
+                <small> This is a {{ post.category }} post</small>
+                <p> {{post.content}} </p>
+            </div>
+
+        {% endfor %}
+    {% else %}
+        {% for post in posts%}
+            {% if post.category == selected_category %}
+            <div class="content-section">
+                <h1><a href="{{ url_for('post', post_id=post.id) }}"> {{ post.title }} </a> </h1>
+                <p> By {{ post.author }} on {{ post.date_posted.strftime('%B %d %Y') }}</p>
+                <small> This is a {{ post.category }} post</small>
+                <p> {{post.content}} </p>
+            </div>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+{% endblock content %}
+
+
+
+{% block sidebar %}
+    <div class="col-md-4">
+        <div class="content-section">
+            <h3> Categories </h3>
+            <p class="test-muted"> Choose a category to view only posts of that type </p>
+            <ul class="list-group">
+                {% for category in categories%}
+                <li class="list-group-item list-group-item-light"><a href="{{ url_for('filter_posts', category=category)}}">{{category}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock sidebar%}
+
+

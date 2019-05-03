@@ -1,0 +1,15 @@
+{% extends "layout.html"%}
+
+{% block content %}
+     <div class="content-section">
+         <h1> {{ post.title }} </h1>
+         <p> By {{ post.author }} on {{ post.date_posted.strftime('%B %d %Y') }}</p>
+         <small> This is a {{ post.category }} post</small>
+         <p> {{post.content}} </p>
+     </div>
+
+    <div>
+        <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_post', post_id=post.id) }}"> Update Post</a>
+        <a class="btn btn-danger btn-sm m-1" href="{{ url_for('delete_post', post_id=post.id) }}"> Delete Post</a>
+    </div>
+{% endblock content %}
