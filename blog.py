@@ -33,7 +33,7 @@ def get_categories(posts):
 def home():
     posts = Post.query.all()
     categories = get_categories(posts)
-    return render_template('home.html', posts=posts, categories=categories)
+    return render_template('index.html', posts=posts, categories=categories)
 
 @app.route('/post/<int:post_id>')
 def post(post_id):
